@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obtener Temperatura</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-image: radial-gradient(circle, #ffcc00, #ff6600);
+            background-image: radial-gradient(circle, #66ffcc, #ff33cc);
+
+            text-align: center;
+            padding: 50px;
+        }
+
+        /*
+        body {
+            background: radial-gradient(circle at center, #ffe6e6 0%, #ffcccb 20%, #ffd700 40%, #90ee90 70%, #ffffff 100%);
+        
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        */
+        .container {
+            width: 70%;
+            height: 100%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            color: blue;
+            font-size: 35px;
+            font-weight: 700;
+            text-align: center;
+            margin: 20px;
+            padding-top: 40px;
+        }
+
+        p {
+            color: rgb(255, 225, 0);
+            font-size: 35px;
+            font-weight: 700;
+            text-align: center;
+            margin: 20px;
+            padding-top: 40px;
+        }
+
+        #inputCiudad {
+            padding: 8px;
+            margin: 20px;
+            margin-bottom: 10px;
+            text-align: center;
+            color: rgb(255, 77, 0);
+            font-weight: 700;
+            font-size: 35px;
+        }
+
+        #botonVerClima {
+            padding: 8px 20px;
+            font-size: 20px;
+            background-color: greenyellow;
+        }
+
+        #infoClima {
+            font-size: 25px;
+            color: black;
+            background-color: yellow;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        /* Media queries para diferentes tamaños de pantalla */
+        @media screen and (max-width: 768px) {
+
+            /* Estilos para pantallas más pequeñas */
+            .container {
+                width: 80%;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+            p {
+                color: rgb(255, 225, 0);
+                font-size: 25px;
+                font-weight: 700;
+                text-align: center;
+                margin: 20px;
+                padding-top: 40px;
+            }
+            #inputCiudad {
+                padding: 8px;
+                margin: 20px;
+                margin-bottom: 10px;
+                text-align: center;
+                color: rgb(255, 77, 0);
+                font-weight: 700;
+                font-size: 35px;
+            }
+
+            #botonVerClima {
+                font-size: 16px;
+            }
+
+            #infoClima {
+                font-size: 20px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            /* Estilos para pantallas aún más pequeñas */
+            .container {
+                width: 90%;
+            }
+        
+            h1 {
+                font-size: 24px;
+            }
+        
+            #inputCiudad {
+                display: flex;
+                justify-content: space-between; /* Centra horizontalmente y agrega espacio a ambos lados */
+                font-size: 16px;
+                width: 80%;
+                text-align: center;
+            }
+        
+            #botonVerClima {
+                font-size: 25px;
+            }
+        
+            #infoClima {
+                font-size: 18px;
+            }
+        }
+        
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Consulta el Clima</h1>
+
+        <input type="text" id="inputCiudad" placeholder="Ingresa la ciudad">
+        <button onclick="obtenerTemperatura()" id="botonVerClima">Ver Clima</button>
+        <p id="infoClima"></p>
+        <script>
+            // Esta función se activa cuando se presiona el botón "Ver Clima"
+            function obtenerTemperatura() {
+                // Obtiene el valor ingresado en el campo de texto 'inputCiudad'
+                const ciudad = document.getElementById('inputCiudad').value;
+
+                // Clave de API proporcionada por OpenWeatherMap
+                const api_key = '12e717669f6d0f7358f106ac8ab9528b'; // Reemplaza 'TU_API_KEY' con tu propia clave de API de OpenWeatherMap
+
+                // URL de la API que proporciona la información del clima para una ciudad específica
+                const url = `http://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${api_key}&units=metric`;
+
+                // Realiza una solicitud GET a la API utilizando fetch
+                fetch(url)
+                    // Maneja la respuesta de la API
+                    .then(response => {
+                        // Verifica si la respuesta de la API es exitosa
+                        if (!response.ok) {
+                            // Si hay un error en la respuesta, lanza un error
+                            throw new Error('Error al obtener los datos del clima');
+                        }
+                        // Si la respuesta es exitosa, devuelve los datos en formato JSON
+                        return response.json();
+                    })
+                    // Maneja los datos JSON recibidos
+                    .then(data => {
+                        // Extrae la temperatura actual de los datos recibidos
+                        const temperature = data.main.temp;
+
+                        // Muestra la información del clima en el elemento HTML 'infoClima'
+                        const infoClima = document.getElementById('infoClima');
+                        infoClima.innerHTML = `La temperatura actual en ${ciudad} es: <span style="color: black; font-size: 25px;">${temperature} grados Celsius</span>`;
+                    })
+                    // Maneja cualquier error que pueda ocurrir durante la solicitud a la API
+                    .catch(error => {
+                        // Muestra un mensaje de error en caso de un problema durante la solicitud
+                        console.error('Hubo un error:', error);
+                        const infoClima = document.getElementById('infoClima');
+                        infoClima.innerText = 'Hubo un error al obtener la información del clima';
+                        infoClima.style.backgroundColor = 'red';
+                    });
+            }
+        </script>
+
+
+        <br>
+        <br>
+        <p><i class="fab fa-js-square"></i> Creado con JavaScript puro <i class="fas fa-laptop-code"></i></p>
+
+        
+    </div>
+
+
+</body>
+
+</html>
