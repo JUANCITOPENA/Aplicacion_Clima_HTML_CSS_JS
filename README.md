@@ -25,13 +25,13 @@ Esta es una aplicación web simple que muestra la temperatura actual de una ciud
 
 ## Capturas de Pantalla
 
-![Captura de Pantalla 1](ruta/a/Screenshot_32.png)
+![Captura de Pantalla 1](Screenshot_32.png)
 _Descripción opcional de la captura de pantalla 1._
 
-![Captura de Pantalla 2](ruta/a/Screenshot_33.png)
+![Captura de Pantalla 2](Screenshot_33.png)
 _Descripción opcional de la captura de pantalla 2._
 
-![Captura de Pantalla 3](ruta/a/Screenshot_34.png)
+![Captura de Pantalla 3](Screenshot_34.png)
 
 ## Contribución
 
