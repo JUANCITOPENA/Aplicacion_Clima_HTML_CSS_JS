@@ -39,7 +39,7 @@ Si deseas contribuir a este proyecto, ¡eres bienvenido! Siéntete libre de abri
 
 ## Autor
 
-Este proyecto fue creado por [Tu Nombre] - [Tu Sitio Web o Perfil de GitHub].
+Este proyecto fue creado por [Juancito Peña V.] - [https://advisertecnology.com/index.php/2023/11/22/html-css-javascript-y-openweathermap-explorando-el-clima-a-traves-del-desarrollo-web/#].
 
 ## Agradecimientos
 
